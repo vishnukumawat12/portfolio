@@ -7,453 +7,473 @@
 <meta name="description" content="Portfolio of Vishnu Kumawat, MBA student at the School of Management and Entrepreneurship, IIT Jodhpur.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #EDF1F9;
-    --surface: #FFFFFF;
-    --ink: #141A33;
-    --muted: #55607F;
-    --indigo: #27348B;
-    --marigold: #E9A415;
-    --line: #C9D2E6;
-    --night: #0E1330;
-    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
-    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --ink: #0F0F10;
+    --text: #3A3A3F;
+    --muted: #77777F;
+    --line: #E4E4DF;
+    --chip: #F0F0EC;
+    --blue: #1D6BF3;
+    --btn: #0F0F10;
+    --btn-text: #FFFFFF;
+    --panel: #0F0F10;
+    --shadow: 0 10px 30px rgba(15, 15, 16, .07);
+    --serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+    --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   [data-theme="dark"] {
-    --paper: #0E1330;
-    --surface: #171E45;
-    --ink: #EEF1FA;
-    --muted: #A5AFCF;
-    --indigo: #9FB0FF;
-    --line: #2C3668;
-    --night: #070A1D;
+    --bg: #0E0F12;
+    --card: #17191E;
+    --ink: #F4F4F1;
+    --text: #C9C9CE;
+    --muted: #8D8D96;
+    --line: #2A2C33;
+    --chip: #1E2026;
+    --blue: #5C9BFF;
+    --btn: #F4F4F1;
+    --btn-text: #0F0F10;
+    --panel: #17191E;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .35);
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--body);
-    font-size: 1.0625rem;
-    line-height: 1.6;
-    transition: background-color .25s, color .25s;
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 1.0625rem; line-height: 1.7;
+    transition: background-color .3s, color .3s;
   }
-  a { color: var(--indigo); text-underline-offset: 3px; }
-  :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; border-radius: 4px; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+  strong { color: var(--ink); font-weight: 600; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
 
-  /* Top bar */
-  .topbar {
-    position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
   }
-  .topbar .wrap { display: flex; align-items: center; gap: 20px; min-height: 60px; }
-  .mark { font-family: var(--display); font-weight: 800; font-size: 1.15rem; color: var(--ink); text-decoration: none; margin-right: auto; }
-  .topbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
-  .topbar nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem; }
-  .topbar nav a:hover { color: var(--ink); }
-  .theme-btn {
-    font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
-    background: var(--surface); color: var(--ink);
-    border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+  .nav .wrap { display: flex; align-items: center; gap: 24px; min-height: 62px; }
+  .mono { font-family: var(--serif); font-size: 1.35rem; color: var(--ink); text-decoration: none; }
+  .nav ul { list-style: none; display: flex; gap: 22px; margin: 0 auto 0 8px; padding: 0; }
+  .nav ul a {
+    text-decoration: none; color: var(--muted); font-size: .8rem;
+    letter-spacing: .06em; text-transform: uppercase; font-weight: 500;
   }
+  .nav ul a:hover, .nav ul a.active { color: var(--ink); }
+  .toggle {
+    width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;
+    background: var(--chip); border: 1px solid var(--line); color: var(--ink);
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    font: inherit; font-weight: 500; text-decoration: none;
+    padding: 13px 26px; border-radius: 999px; border: 1px solid var(--btn);
+    background: var(--btn); color: var(--btn-text); transition: transform .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.small { padding: 8px 18px; font-size: .92rem; }
+  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
 
   /* Hero */
-  .hero { padding: 72px 0 56px; }
-  .hero h1 {
-    font-family: var(--display); font-weight: 800;
-    font-size: clamp(3.4rem, 13vw, 9.5rem);
-    line-height: .86; letter-spacing: -.04em; margin: 0;
-    color: var(--indigo);
+  .hero { min-height: calc(100vh - 62px); display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; padding-top: 48px; padding-bottom: 64px; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 10px; color: var(--blue);
+    font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; margin-bottom: 18px;
   }
-  .hero h1 span { display: block; }
-  .hero h1 span + span { margin-left: clamp(1.5rem, 9vw, 7rem); color: var(--ink); }
-  .hero-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; margin-top: 44px; align-items: end; }
-  .hero p { font-size: 1.25rem; line-height: 1.5; margin: 0; max-width: 34em; }
-  .contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; justify-items: start; }
-  .contact-list a {
-    display: inline-block; text-decoration: none; font-weight: 600;
-    border-bottom: 3px solid var(--marigold); color: var(--ink); padding-bottom: 1px;
+  .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--blue); }
+  h1 {
+    font-family: var(--serif); font-weight: 400; color: var(--ink);
+    font-size: clamp(3.2rem, 8vw, 5.4rem); line-height: 1; letter-spacing: -.02em; margin: 0 0 22px;
   }
-  .contact-list a:hover { color: var(--indigo); }
+  h1 em, h2 em { color: var(--blue); font-style: italic; }
+  h1 em { display: block; }
+  .intro { font-size: 1.15rem; max-width: 30em; margin: 0 0 26px; }
+  .badges, .chips, .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 9px; }
+  .badges li, .chips li {
+    background: var(--chip); border: 1px solid var(--line); color: var(--ink);
+    border-radius: 999px; padding: 5px 14px; font-size: .88rem;
+  }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .float { position: relative; height: 420px; }
+  .fcard {
+    position: absolute; background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; padding: 22px 24px; box-shadow: var(--shadow); width: 230px;
+    animation: bob 6s ease-in-out infinite;
+  }
+  .fcard small { display: block; color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+  .fcard b { display: block; color: var(--ink); font-weight: 500; font-size: 1.05rem; line-height: 1.35; }
+  .fcard span { display: block; color: var(--muted); font-size: .88rem; margin-top: 4px; }
+  .fcard .pill { display: inline-block; background: var(--blue); color: #fff; border-radius: 8px; padding: 3px 10px; font-size: .8rem; font-weight: 600; margin-top: 10px; }
+  .fcard.a { top: 10px; right: 0; }
+  .fcard.b { top: 170px; left: 30px; animation-delay: -2s; z-index: 2; }
+  .fcard.c { bottom: 0; right: 40px; width: 250px; text-align: center; animation-delay: -4s; }
+  @keyframes bob { 50% { transform: translateY(-10px); } }
 
   /* Sections */
-  .block { padding: 56px 0; border-top: 1px solid var(--line); }
-  .block h2 {
-    font-family: var(--display); font-weight: 800; letter-spacing: -.02em;
-    font-size: clamp(1.9rem, 4.5vw, 2.9rem); line-height: 1.05; margin: 0 0 8px;
+  .section { padding: 88px 0; border-top: 1px solid var(--line); }
+  .label { color: var(--blue); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; }
+  h2 {
+    font-family: var(--serif); font-weight: 400; color: var(--ink);
+    font-size: clamp(2.1rem, 5vw, 3.1rem); line-height: 1.1; letter-spacing: -.01em; margin: 0 0 40px;
   }
-  .block .lede { color: var(--muted); margin: 0 0 28px; max-width: 38em; }
+  h3 { color: var(--ink); font-weight: 600; font-size: 1.15rem; line-height: 1.35; margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; transition: transform .25s, box-shadow .25s; }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .card p { margin: 12px 0 0; }
+  .card ul.points { margin: 12px 0 0; padding-left: 20px; }
+  .tags { margin-top: 18px; }
+  .tags li { background: var(--chip); color: var(--text); border-radius: 8px; padding: 3px 11px; font-size: .82rem; }
+  .meta { color: var(--muted); font-size: .92rem; }
+  .head { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .head .right { text-align: right; }
+  .icon { font-size: 1.7rem; line-height: 1; margin-bottom: 14px; }
+  .tagline { display: inline-block; background: color-mix(in srgb, var(--blue) 12%, transparent); color: var(--blue); border-radius: 999px; padding: 2px 12px; font-size: .78rem; font-weight: 600; margin-left: 8px; vertical-align: middle; }
 
-  /* Journey */
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-  .chip {
-    font: inherit; font-size: .95rem; font-weight: 600; cursor: pointer;
-    padding: 7px 16px; border-radius: 999px;
-    border: 1.5px solid var(--line); background: transparent; color: var(--ink);
+  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
+  .about p { margin: 0 0 18px; }
+  .about .chips { margin-top: 26px; }
+  .side { display: grid; gap: 18px; align-content: start; }
+  .side .card small { display: block; color: var(--muted); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+  .side .tags { margin-top: 0; }
+
+  .line { border-left: 2px solid var(--line); padding-left: 28px; display: grid; gap: 20px; }
+  .line .card { position: relative; }
+  .line .card::before { content: ""; position: absolute; left: -36px; top: 34px; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); border: 3px solid var(--bg); }
+
+  .edu { display: grid; }
+  .edu-row { display: grid; grid-template-columns: 170px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .edu-row:first-child { padding-top: 0; }
+  .edu-row .yrs { color: var(--muted); font-size: .95rem; padding-top: 2px; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .stack { display: grid; gap: 20px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+  .tab { font: inherit; font-size: .95rem; font-weight: 500; cursor: pointer; padding: 8px 20px; border-radius: 999px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); }
+  .tab[aria-selected="true"] { background: var(--btn); color: var(--btn-text); border-color: var(--btn); }
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .skill { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; color: var(--ink); font-weight: 500; }
+  .skill span { color: var(--blue); font-size: .85rem; font-weight: 600; }
+
+  .contact { padding: 0 0 40px; }
+  .panel { background: var(--panel); color: #C9C9CE; border-radius: 28px; padding: 72px 28px; text-align: center; border: 1px solid var(--line); }
+  .panel .label { color: #8FB8FF; }
+  .panel h2 { color: #fff; margin-bottom: 16px; }
+  .panel h2 em { color: #8FB8FF; }
+  .panel p { max-width: 32em; margin: 0 auto 30px; }
+  .panel .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .panel .links a, .panel .links button {
+    font: inherit; font-size: .95rem; cursor: pointer; text-decoration: none; color: #fff;
+    background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 999px; padding: 10px 20px;
   }
-  .chip[aria-pressed="true"] { background: var(--indigo); border-color: var(--indigo); color: var(--paper); }
-  .timeline { list-style: none; margin: 0; padding: 0; }
-  .year-row { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 14px 0; border-top: 1px dashed var(--line); }
-  .year-row:first-child { border-top: 0; }
-  .year-row[hidden] { display: none; }
-  .year { font-family: var(--display); font-weight: 800; font-size: 2.1rem; line-height: 1.1; color: var(--indigo); }
-  .entries { display: grid; gap: 8px; }
-  .entry { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  .entry[hidden] { display: none; }
-  .entry-btn {
-    font: inherit; color: inherit; text-align: left; cursor: pointer;
-    width: 100%; background: none; border: 0; padding: 14px 18px;
-    display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items: center;
-  }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot.study { background: var(--indigo); }
-  .dot.work { background: var(--marigold); }
-  .dot.community { background: #2E9E7B; }
-  .dot.certificate { background: #C2478E; }
-  .entry-title { font-weight: 600; }
-  .entry-when { color: var(--muted); font-size: .92rem; white-space: nowrap; }
-  .entry-body { padding: 0 18px 16px 42px; color: var(--muted); }
-  .entry-body[hidden] { display: none; }
-  .entry-body p { margin: 0 0 6px; }
-  .entry-body ul { margin: 0; padding-left: 18px; }
-  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; color: var(--muted); font-size: .92rem; }
-  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .panel .links a:hover, .panel .links button:hover { background: rgba(255, 255, 255, .16); }
+  .panel .foot { margin-top: 30px; font-size: .88rem; color: #8D8D96; }
 
-  /* Education */
-  .edu { width: 100%; border-collapse: collapse; }
-  .edu th, .edu td { text-align: left; padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
-  .edu thead th { color: var(--muted); font-weight: 500; font-size: .92rem; }
-  .edu tbody th { font-weight: 600; }
-  .edu .where { color: var(--muted); display: block; font-weight: 400; font-size: .95rem; }
-  .bar { height: 10px; border-radius: 5px; background: var(--line); width: min(220px, 30vw); overflow: hidden; }
-  .bar i { display: block; height: 100%; background: var(--indigo); border-radius: 5px; }
-  .score { font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+  /* Reveal on scroll (only when scripting is on) */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s, transform .6s; }
+  .js .reveal.in { opacity: 1; transform: none; }
 
-  /* Black hole */
-  .hole { background: var(--night); color: #EEF1FA; border-radius: 20px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
-  .hole-text { padding: 40px; }
-  .hole-text h2 { color: #fff; }
-  .hole-text p { color: #B9C2E2; margin: 0 0 16px; }
-  .hole-text .date { color: var(--marigold); font-weight: 600; }
-  .hole canvas { width: 100%; height: 100%; min-height: 340px; display: block; touch-action: none; cursor: crosshair; }
-  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 24px; }
-  .controls label { display: flex; align-items: center; gap: 10px; font-size: .95rem; color: #B9C2E2; }
-  .controls input[type=range] { accent-color: var(--marigold); width: 150px; }
-  .ghost-btn {
-    font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
-    background: transparent; color: #fff; border: 1.5px solid #4A558F; border-radius: 999px; padding: 6px 16px;
-  }
-
-  /* Skills */
-  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .cols h3 { font-family: var(--display); font-weight: 600; font-size: 1.25rem; margin: 0 0 12px; }
-  .tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .tags li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; font-size: .95rem; }
-  .interests { margin-top: 36px; font-size: 1.15rem; max-width: 40em; }
-
-  /* Footer */
-  footer { background: var(--indigo); color: var(--paper); padding: 56px 0; margin-top: 24px; }
-  footer h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1; letter-spacing: -.03em; margin: 0 0 24px; }
-  footer .links { display: flex; flex-wrap: wrap; gap: 12px; }
-  footer .links a, footer .links button {
-    font: inherit; font-weight: 600; cursor: pointer; text-decoration: none;
-    color: var(--indigo); background: var(--paper); border: 0; border-radius: 999px; padding: 10px 20px;
-  }
-  footer .links a.primary { background: var(--marigold); color: #141A33; }
-  footer small { display: block; margin-top: 28px; opacity: .75; }
-
-  @media (max-width: 760px) {
-    .topbar nav { display: none; }
-    .hero { padding: 48px 0 40px; }
-    .hero-row, .hole, .cols { grid-template-columns: 1fr; }
-    .year-row { grid-template-columns: 1fr; gap: 6px; }
-    .entry-btn { grid-template-columns: 12px 1fr; }
-    .entry-when { grid-column: 2; }
-    .hole-text { padding: 28px; }
-    .edu thead { display: none; }
-    .edu td.bar-cell { display: none; }
+  @media (max-width: 900px) {
+    .nav ul { display: none; }
+    .nav .wrap { gap: 10px; padding: 0 16px; }
+    .nav .mono { margin-right: auto; }
+    .nav .btn.small { padding: 8px 14px; font-size: .88rem; }
+    .hero, .about, .grid2, .skills { grid-template-columns: 1fr; }
+    .hero { min-height: 0; }
+    .float { height: auto; display: grid; gap: 14px; }
+    .fcard { position: static; width: auto; text-align: left; animation: none; }
+    .section { padding: 64px 0; }
+    .edu-row { grid-template-columns: 1fr; gap: 4px; }
+    .head .right { text-align: left; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    body { transition: none; }
+    .fcard { animation: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .btn, .card { transition: none; }
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
+<header class="nav">
   <div class="wrap">
-    <a class="mark" href="#top">Vishnu Kumawat</a>
-    <nav aria-label="Sections">
-      <a href="#journey">Journey</a>
-      <a href="#education">Education</a>
-      <a href="#project">Project</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="theme-btn" id="themeBtn" type="button">Dark mode</button>
+    <a class="mono" href="#hero" aria-label="Vishnu Kumawat, back to top">VK</a>
+    <ul id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="toggle" id="themeBtn" type="button" aria-label="Switch to dark mode">🌙</button>
+    <a class="btn small" href="https://www.linkedin.com/in/vishnukumawat/" target="_blank" rel="noopener">Connect</a>
+    <a class="btn small ghost" href="mailto:vishnu12kumawat12@gmail.com">Email me</a>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero wrap">
-    <h1><span>Vishnu</span><span>Kumawat</span></h1>
-    <div class="hero-row">
-      <p>MBA student at the School of Management and Entrepreneurship, IIT Jodhpur. A mathematics graduate from Bhilwara who spent three years helping run the family cattle feed business, and who has volunteered with Muskan Foundation since 2022.</p>
-      <ul class="contact-list">
-        <li><a href="mailto:vishnu12kumawat12@gmail.com">vishnu12kumawat12@gmail.com</a></li>
-        <li><a href="tel:+918619352808">+91 86193 52808</a></li>
-        <li><a href="https://linkedin.com/in/vishnukumawat" target="_blank" rel="noopener">linkedin.com/in/vishnukumawat</a></li>
+<main>
+  <section class="hero wrap" id="hero">
+    <div>
+      <div class="eyebrow">Management, operations, community</div>
+      <h1>Vishnu <em>Kumawat</em></h1>
+      <p class="intro">MBA student at IIT Jodhpur with a degree in mathematics and close to three years of hands-on experience in a family cattle feed business in Bhilwara. Interested in business ideas, entrepreneurship and community work.</p>
+      <ul class="badges">
+        <li>MBA at IIT Jodhpur</li>
+        <li>B.Sc Mathematics, 75.90%</li>
+        <li>Family business operations</li>
+        <li>Muskan Foundation volunteer</li>
+        <li>Bhilwara, Rajasthan</li>
       </ul>
-    </div>
-  </section>
-
-  <section class="block" id="journey">
-    <div class="wrap">
-      <h2>From Bhilwara to Jodhpur</h2>
-      <p class="lede">Eight years of study, work and community service. Filter by type, and select any entry to read more.</p>
-      <div class="chips" role="group" aria-label="Filter the timeline" id="chips"></div>
-      <ol class="timeline" id="timeline"></ol>
-      <div class="legend" aria-hidden="true">
-        <span><i class="dot study"></i>Study</span>
-        <span><i class="dot work"></i>Work</span>
-        <span><i class="dot community"></i>Community</span>
-        <span><i class="dot certificate"></i>Certificate</span>
+      <div class="cta">
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/vishnukumawat/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
-  </section>
-
-  <section class="block" id="education">
-    <div class="wrap">
-      <h2>Education</h2>
-      <p class="lede">School and college in Bhilwara, Rajasthan, then management at IIT Jodhpur.</p>
-      <table class="edu">
-        <thead><tr><th scope="col">Qualification</th><th scope="col">Years</th><th scope="col">Result</th><th scope="col"><span hidden>Chart</span></th></tr></thead>
-        <tbody>
-          <tr><th scope="row">MBA<span class="where">Indian Institute of Technology, Jodhpur</span></th><td>2026 to present</td><td class="score">In progress</td><td class="bar-cell"></td></tr>
-          <tr><th scope="row">B.Sc Mathematics<span class="where">M.L.V. Govt. College, Bhilwara</span></th><td>2020 to 2023</td><td class="score">75.90%</td><td class="bar-cell"><div class="bar"><i style="width:75.9%"></i></div></td></tr>
-          <tr><th scope="row">Senior Secondary<span class="where">Govt Senior Secondary School, RBSE Board</span></th><td>2020</td><td class="score">86.20%</td><td class="bar-cell"><div class="bar"><i style="width:86.2%"></i></div></td></tr>
-          <tr><th scope="row">Secondary<span class="where">S.A.V.N. Senior Secondary School, RBSE Board</span></th><td>2018</td><td class="score">84%</td><td class="bar-cell"><div class="bar"><i style="width:84%"></i></div></td></tr>
-        </tbody>
-      </table>
+    <div class="float">
+      <div class="fcard a"><small>Education</small><b>B.Sc Mathematics</b><span>M.L.V. Govt. College, 2023</span><i class="pill" style="font-style:normal">75.90%</i></div>
+      <div class="fcard b"><small>Project</small><b>Study on black holes</b><span>Academic project, March 2023</span></div>
+      <div class="fcard c"><small>Currently at</small><b>IIT Jodhpur</b><span>MBA candidate, since 2026</span></div>
     </div>
   </section>
 
-  <section class="block" id="project">
+  <section class="section" id="about">
     <div class="wrap">
-      <div class="hole">
-        <div class="hole-text">
-          <h2>Study on black holes</h2>
-          <p class="date">Academic project, March 2023</p>
-          <p>A study of how black holes form and what properties and characteristics define them, covering gravity, spacetime and singularities. The findings were presented at the end of the project.</p>
-          <p>Try it: drag the black hole around, and raise its mass to pull the surrounding matter in faster.</p>
-          <div class="controls">
-            <label>Mass <input type="range" id="mass" min="1" max="10" value="4" step="1"></label>
-            <button class="ghost-btn" id="pauseBtn" type="button">Pause</button>
+      <div class="label reveal">About me</div>
+      <h2 class="reveal">Numbers, business and <em>people</em></h2>
+      <div class="about">
+        <div class="reveal">
+          <p>I'm <strong>Vishnu Kumawat</strong>, currently pursuing an <strong>MBA at the School of Management and Entrepreneurship, IIT Jodhpur</strong>. I graduated with a <strong>B.Sc in Mathematics</strong> from M.L.V. Govt. College, Bhilwara, in 2023.</p>
+          <p>After college I worked in my family's <strong>cattle feed business</strong>, helping with day-to-day operations: <strong>inventory management, dispatch and customer coordination</strong>.</p>
+          <p>Since 2022 I have been a member and volunteer at <strong>Muskan Foundation</strong>, helping organise blood donation camps, tree plantation drives and animal welfare activities in Bhilwara.</p>
+          <ul class="chips">
+            <li>📚 Reading</li><li>🏃 Running</li><li>🧭 Travelling</li><li>💡 Business ideas</li><li>🚀 Entrepreneurship</li>
+          </ul>
+        </div>
+        <div class="side reveal">
+          <div class="card">
+            <small>Core strengths</small>
+            <ul class="tags">
+              <li>Business operations</li><li>Inventory management</li><li>Dispatch</li><li>Customer coordination</li><li>MS Excel</li><li>Problem solving</li><li>Teamwork</li>
+            </ul>
+          </div>
+          <div class="card">
+            <small>Languages</small>
+            <ul class="tags"><li>Mewadi (native)</li><li>Hindi</li><li>English</li></ul>
           </div>
         </div>
-        <canvas id="space" aria-label="Animation of particles orbiting and falling into a black hole" role="img"></canvas>
       </div>
     </div>
   </section>
 
-  <section class="block" id="skills">
+  <section class="section" id="experience">
     <div class="wrap">
-      <h2>Skills</h2>
-      <p class="lede">Practical office tools, people skills built through business and volunteering, and three languages.</p>
-      <div class="cols">
-        <div>
-          <h3>Technical</h3>
-          <ul class="tags"><li>MS Excel (intermediate)</li><li>MS Word</li><li>MS PowerPoint</li></ul>
+      <div class="label reveal">Experience</div>
+      <h2 class="reveal">Learning business on the <em>ground</em></h2>
+      <div class="line">
+        <article class="card reveal">
+          <div class="head">
+            <div><h3>Operations and Business Management</h3><div class="meta">Family business (cattle feed)</div></div>
+            <div class="meta right">August 2023 to April 2026<br>Bhilwara, Rajasthan</div>
+          </div>
+          <p>Assisted in day-to-day business operations, including inventory management, dispatch and customer coordination.</p>
+          <ul class="tags"><li>Business operations</li><li>Inventory management</li><li>Dispatch</li><li>Customer coordination</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="wrap">
+      <div class="label reveal">Education</div>
+      <h2 class="reveal">Academic <em>background</em></h2>
+      <div class="edu">
+        <div class="edu-row reveal"><div class="yrs">2026 to present</div><div><h3>Master of Business Administration (MBA)<span class="tagline">Current</span></h3><div class="meta">School of Management and Entrepreneurship, Indian Institute of Technology, Jodhpur</div></div></div>
+        <div class="edu-row reveal"><div class="yrs">2020 to 2023</div><div><h3>B.Sc (Mathematics)<span class="tagline">75.90%</span></h3><div class="meta">M.L.V. Govt. College, Bhilwara</div></div></div>
+        <div class="edu-row reveal"><div class="yrs">2020</div><div><h3>Senior Secondary<span class="tagline">86.20%</span></h3><div class="meta">Govt Senior Secondary School, RBSE Board</div></div></div>
+        <div class="edu-row reveal"><div class="yrs">2018</div><div><h3>Secondary<span class="tagline">84%</span></h3><div class="meta">S.A.V.N. Senior Secondary School, RBSE Board</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="label reveal">Projects</div>
+      <h2 class="reveal">Curiosity beyond the <em>syllabus</em></h2>
+      <article class="card reveal">
+        <div class="head">
+          <div><div class="icon" aria-hidden="true">🌌</div><h3>Study on Black Holes</h3></div>
+          <div class="meta right">Academic project<br>March 2023</div>
         </div>
-        <div>
-          <h3>Working with people</h3>
-          <ul class="tags"><li>Problem solving</li><li>Solution oriented</li><li>Adaptability</li><li>Active listening</li><li>Teamwork</li></ul>
-        </div>
-        <div>
-          <h3>Languages</h3>
-          <ul class="tags"><li>Mewadi (native)</li><li>Hindi</li><li>English</li></ul>
+        <p>Conducted a study of black holes, examining their formation, properties and characteristics. Explored concepts related to gravity, spacetime and singularities, then presented the findings and built an understanding of complex scientific concepts.</p>
+        <ul class="tags"><li>Gravity</li><li>Spacetime</li><li>Singularities</li><li>Research</li><li>Presentation</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="community">
+    <div class="wrap">
+      <div class="label reveal">Community and activities</div>
+      <h2 class="reveal">Service and <em>growth</em></h2>
+      <div class="stack">
+        <article class="card reveal">
+          <div class="head">
+            <div><div class="icon" aria-hidden="true">🤝</div><h3>Member and Volunteer<span class="tagline">Current</span></h3><div class="meta">Muskan Foundation</div></div>
+            <div class="meta right">August 2022 to present<br>Bhilwara, Rajasthan</div>
+          </div>
+          <ul class="points">
+            <li>Coordinated and participated in community-focused initiatives supporting underprivileged individuals and students.</li>
+            <li>Assisted in organising and executing social welfare activities, including blood donation camps, tree plantation and animal welfare initiatives.</li>
+          </ul>
+          <ul class="tags"><li>Blood donation camps</li><li>Tree plantation</li><li>Animal welfare</li><li>Community service</li></ul>
+        </article>
+        <div class="grid2">
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">🎤</div>
+            <h3>Sandstone Summit 6.0</h3>
+            <div class="meta">Participant, IIT Jodhpur, August 2026</div>
+            <p>Gained exposure to industry perspectives, entrepreneurial ideas and discussions on emerging business and management trends.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">🌱</div>
+            <h3>7-Day Jivan Vidya Shivir</h3>
+            <div class="meta">Participant, Rajasamand, Rajasthan, April 2024</div>
+            <p>A seven-day residential programme focused on self-development, values, harmony in life and nature, and holistic growth.</p>
+          </article>
         </div>
       </div>
-      <p class="interests">Outside of work: reading, running, travelling, and exploring business ideas and entrepreneurship.</p>
+    </div>
+  </section>
+
+  <section class="section" id="certifications">
+    <div class="wrap">
+      <div class="label reveal">Certifications</div>
+      <h2 class="reveal">Certified <em>skills</em></h2>
+      <div class="grid2">
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">💻</div>
+          <h3>Rajasthan State Certificate in Information Technology (RSCIT)</h3>
+          <div class="meta">May to August 2018, Bhilwara (offline)</div>
+          <p>Proficiency in MS Word, MS Excel and MS PowerPoint, digital communication and internet applications, plus awareness of cybersecurity, e-governance and digital services.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">🗣️</div>
+          <h3>Certificate in Communicative English and Public Speaking</h3>
+          <div class="meta">April to July 2021, Bhilwara (offline)</div>
+          <p>Extempore, conversations and case-study presentations to build confidence, with improved articulation, communication and structured expression of ideas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="label reveal">Skills</div>
+      <h2 class="reveal">What I <em>bring</em></h2>
+      <div class="tabs reveal" role="tablist" aria-label="Skill categories" id="tabs"></div>
+      <div class="skills" id="skillList" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="panel reveal">
+      <div class="label">Get in touch</div>
+      <h2>Let's <em>connect</em></h2>
+      <p>For internships, projects or a conversation about business and entrepreneurship, reach me through any of these.</p>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/vishnukumawat/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="mailto:vishnu12kumawat12@gmail.com">✉️ vishnu12kumawat12@gmail.com</a>
+        <a href="tel:+918619352808">📞 +91 86193 52808</a>
+        <button type="button" id="copyBtn">📋 Copy email address</button>
+      </div>
+      <div class="foot">IIT Jodhpur, Rajasthan, India</div>
     </div>
   </section>
 </main>
 
-<footer id="contact">
-  <div class="wrap">
-    <h2>Get in touch</h2>
-    <div class="links">
-      <a class="primary" href="mailto:vishnu12kumawat12@gmail.com">Send an email</a>
-      <a href="https://linkedin.com/in/vishnukumawat" target="_blank" rel="noopener">Open LinkedIn</a>
-      <a href="tel:+918619352808">Call +91 86193 52808</a>
-      <button type="button" id="copyBtn">Copy email address</button>
-    </div>
-    <small>Vishnu Kumawat, School of Management and Entrepreneurship, Indian Institute of Technology Jodhpur</small>
-  </div>
-</footer>
-
 <script>
 (function () {
-  /* Theme */
-  var root = document.documentElement, themeBtn = document.getElementById('themeBtn');
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  /* Theme toggle */
+  var themeBtn = document.getElementById('themeBtn');
   function setTheme(t) {
     root.setAttribute('data-theme', t);
-    themeBtn.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+    themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+    themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   }
-  setTheme(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme('light');
   themeBtn.addEventListener('click', function () {
     setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  /* Timeline */
-  var items = [
-    { y: 2018, type: 'study', title: 'Secondary school, 84%', when: '2018', body: ['S.A.V.N. Senior Secondary School, RBSE Board.'] },
-    { y: 2018, type: 'certificate', title: 'Rajasthan State Certificate in Information Technology (RSCIT)', when: 'May to Aug 2018', body: ['Bhilwara, Rajasthan.', ['Proficiency in MS Word, MS Excel and MS PowerPoint.', 'Skills in digital communication and internet applications.', 'Awareness of cybersecurity, e-governance and digital services.']] },
-    { y: 2020, type: 'study', title: 'Senior secondary, 86.20%', when: '2020', body: ['Govt Senior Secondary School, RBSE Board.'] },
-    { y: 2020, type: 'study', title: 'Started B.Sc Mathematics', when: '2020 to 2023', body: ['M.L.V. Govt. College, Bhilwara. Graduated in 2023 with 75.90%.'] },
-    { y: 2021, type: 'certificate', title: 'Certificate in Communicative English and Public Speaking', when: 'Apr to Jul 2021', body: ['Bhilwara, Rajasthan.', ['Took part in extempore, conversations and case-study presentations to build confidence.', 'Improved articulation, communication and structured expression of ideas.']] },
-    { y: 2022, type: 'community', title: 'Joined Muskan Foundation as member and volunteer', when: 'Aug 2022 to present', body: ['Bhilwara, Rajasthan.', ['Coordinated and took part in community initiatives supporting underprivileged individuals and students.', 'Helped organise blood donation camps, tree plantation drives and animal welfare activities.']] },
-    { y: 2023, type: 'study', title: 'Study on black holes', when: 'Mar 2023', body: ['Academic project on the formation, properties and characteristics of black holes, including gravity, spacetime and singularities.'] },
-    { y: 2023, type: 'work', title: 'Operations and business management, family cattle feed business', when: 'Aug 2023 to Apr 2026', body: ['Bhilwara, Rajasthan.', ['Assisted in day-to-day operations: inventory management, dispatch and customer coordination.']] },
-    { y: 2024, type: 'community', title: 'Seven-day Jivan Vidya Shivir', when: 'Apr 2024', body: ['Rajasamand, Rajasthan. A residential programme on self-development, values, harmony in life and nature, and holistic growth.'] },
-    { y: 2026, type: 'study', title: 'Started MBA at IIT Jodhpur', when: '2026 to present', body: ['School of Management and Entrepreneurship, Indian Institute of Technology Jodhpur.'] },
-    { y: 2026, type: 'community', title: 'Sandstone Summit 6.0', when: 'Aug 2026', body: ['IIT Jodhpur. Exposure to industry perspectives, entrepreneurial ideas and discussions on emerging business and management trends.'] }
+  /* Skill tabs */
+  var groups = [
+    ['Technical', [['MS Excel', 'Intermediate'], ['MS Word', ''], ['MS PowerPoint', '']]],
+    ['Soft skills', [['Problem solving', ''], ['Solution oriented', ''], ['Adaptability', ''], ['Active listening', ''], ['Teamwork', '']]],
+    ['Languages', [['Mewadi', 'Native'], ['Hindi', ''], ['English', '']]]
   ];
-  var filters = [['all', 'Everything'], ['study', 'Study'], ['work', 'Work'], ['community', 'Community'], ['certificate', 'Certificates']];
-  var chips = document.getElementById('chips'), tl = document.getElementById('timeline');
-  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
-
-  var rows = {};
-  items.forEach(function (it, i) {
-    if (!rows[it.y]) {
-      var row = el('li', 'year-row');
-      row.appendChild(el('div', 'year', String(it.y)));
-      row.appendChild(el('div', 'entries'));
-      tl.appendChild(row); rows[it.y] = row;
-    }
-    var entry = el('div', 'entry'); entry.dataset.type = it.type;
-    var btn = el('button', 'entry-btn'); btn.type = 'button';
-    btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', 'eb' + i);
-    btn.appendChild(el('i', 'dot ' + it.type));
-    btn.appendChild(el('span', 'entry-title', it.title));
-    btn.appendChild(el('span', 'entry-when', it.when));
-    var body = el('div', 'entry-body'); body.id = 'eb' + i; body.hidden = true;
-    it.body.forEach(function (b) {
-      if (typeof b === 'string') body.appendChild(el('p', '', b));
-      else { var ul = el('ul'); b.forEach(function (x) { ul.appendChild(el('li', '', x)); }); body.appendChild(ul); }
-    });
-    btn.addEventListener('click', function () {
-      var open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open)); body.hidden = open;
-    });
-    entry.appendChild(btn); entry.appendChild(body);
-    rows[it.y].querySelector('.entries').appendChild(entry);
-  });
-
-  function applyFilter(f) {
-    Array.prototype.forEach.call(chips.children, function (c) { c.setAttribute('aria-pressed', String(c.dataset.f === f)); });
-    Object.keys(rows).forEach(function (y) {
-      var any = false;
-      Array.prototype.forEach.call(rows[y].querySelectorAll('.entry'), function (e) {
-        var show = f === 'all' || e.dataset.type === f; e.hidden = !show; if (show) any = true;
-      });
-      rows[y].hidden = !any;
+  var tabs = document.getElementById('tabs'), list = document.getElementById('skillList');
+  function show(i) {
+    Array.prototype.forEach.call(tabs.children, function (t, k) { t.setAttribute('aria-selected', String(k === i)); });
+    list.textContent = '';
+    groups[i][1].forEach(function (s) {
+      var d = document.createElement('div'); d.className = 'skill'; d.textContent = s[0];
+      if (s[1]) { var l = document.createElement('span'); l.textContent = s[1]; d.appendChild(l); }
+      list.appendChild(d);
     });
   }
-  filters.forEach(function (f) {
-    var c = el('button', 'chip', f[1]); c.type = 'button'; c.dataset.f = f[0];
-    c.addEventListener('click', function () { applyFilter(f[0]); });
-    chips.appendChild(c);
+  groups.forEach(function (g, i) {
+    var b = document.createElement('button');
+    b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.textContent = g[0];
+    b.addEventListener('click', function () { show(i); });
+    tabs.appendChild(b);
   });
-  applyFilter('all');
+  show(0);
 
   /* Copy email */
   var copyBtn = document.getElementById('copyBtn');
   copyBtn.addEventListener('click', function () {
-    var done = function (ok) {
-      copyBtn.textContent = ok ? 'Email address copied' : 'Copy failed, select it above';
-      setTimeout(function () { copyBtn.textContent = 'Copy email address'; }, 2200);
-    };
+    function done(ok) {
+      copyBtn.textContent = ok ? '✅ Email address copied' : 'Copy failed, use the email link';
+      setTimeout(function () { copyBtn.textContent = '📋 Copy email address'; }, 2200);
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText('vishnu12kumawat12@gmail.com').then(function () { done(true); }, function () { done(false); });
     } else done(false);
   });
 
-  /* Black hole */
-  var cv = document.getElementById('space'), ctx = cv.getContext('2d');
-  var massInput = document.getElementById('mass'), pauseBtn = document.getElementById('pauseBtn');
-  var W = 0, H = 0, hx = 0, hy = 0, parts = [], running = true, dragging = false;
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Reveal on scroll and active nav link */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    Array.prototype.forEach.call(reveals, function (r) { io.observe(r); });
 
-  function spawn(p) {
-    var a = Math.random() * Math.PI * 2, r = Math.max(W, H) * (0.3 + Math.random() * 0.35);
-    p.x = hx + Math.cos(a) * r; p.y = hy + Math.sin(a) * r;
-    var v = Math.sqrt(mass() * 60 / r) * (0.75 + Math.random() * 0.3);
-    p.vx = -Math.sin(a) * v; p.vy = Math.cos(a) * v;
-    p.hot = Math.random() < 0.3;
-    return p;
+    var links = document.querySelectorAll('#navlinks a');
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Array.prototype.forEach.call(links, function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('main section[id]'), function (s) { spy.observe(s); });
+  } else {
+    Array.prototype.forEach.call(reveals, function (r) { r.classList.add('in'); });
   }
-  function mass() { return Number(massInput.value) * 14; }
-  function resize() {
-    var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
-    W = r.width; H = r.height; cv.width = W * d; cv.height = H * d;
-    ctx.setTransform(d, 0, 0, d, 0, 0);
-    hx = W / 2; hy = H / 2;
-    parts = []; for (var i = 0; i < 260; i++) parts.push(spawn({}));
-    ctx.fillStyle = '#070A1D'; ctx.fillRect(0, 0, W, H);
-    if (!running) draw();
-  }
-  function step() {
-    var m = mass(), horizon = 10 + Number(massInput.value) * 2.2;
-    for (var i = 0; i < parts.length; i++) {
-      var p = parts[i], dx = hx - p.x, dy = hy - p.y, d2 = dx * dx + dy * dy, d = Math.sqrt(d2);
-      if (d < horizon || d > Math.max(W, H) * 1.2) { spawn(p); continue; }
-      var f = m * 60 / (d2 + 40);
-      p.vx += dx / d * f * 0.016; p.vy += dy / d * f * 0.016;
-      p.vx *= 0.9992; p.vy *= 0.9992;
-      p.x += p.vx * 0.16; p.y += p.vy * 0.16;
-    }
-  }
-  function draw() {
-    var horizon = 10 + Number(massInput.value) * 2.2;
-    ctx.fillStyle = 'rgba(7,10,29,0.22)'; ctx.fillRect(0, 0, W, H);
-    for (var i = 0; i < parts.length; i++) {
-      var p = parts[i];
-      ctx.fillStyle = p.hot ? '#E9A415' : '#9FB0FF';
-      ctx.fillRect(p.x, p.y, 1.8, 1.8);
-    }
-    ctx.beginPath(); ctx.arc(hx, hy, horizon + 4, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(233,164,21,0.85)'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.beginPath(); ctx.arc(hx, hy, horizon, 0, Math.PI * 2);
-    ctx.fillStyle = '#000'; ctx.fill();
-  }
-  function loop() {
-    if (running) { for (var k = 0; k < 3; k++) step(); draw(); }
-    requestAnimationFrame(loop);
-  }
-  function setRunning(r) { running = r; pauseBtn.textContent = r ? 'Pause' : 'Play'; }
-  pauseBtn.addEventListener('click', function () { setRunning(!running); });
-  function moveHole(e) {
-    var r = cv.getBoundingClientRect();
-    hx = Math.min(W, Math.max(0, e.clientX - r.left)); hy = Math.min(H, Math.max(0, e.clientY - r.top));
-    if (!running) draw();
-  }
-  cv.addEventListener('pointerdown', function (e) { dragging = true; cv.setPointerCapture(e.pointerId); moveHole(e); });
-  cv.addEventListener('pointermove', function (e) { if (dragging) moveHole(e); });
-  cv.addEventListener('pointerup', function () { dragging = false; });
-  cv.addEventListener('pointercancel', function () { dragging = false; });
-  massInput.addEventListener('input', function () { if (!running) draw(); });
-  window.addEventListener('resize', resize);
-  resize();
-  if (reduce) { for (var s = 0; s < 400; s++) step(); draw(); setRunning(false); }
-  loop();
 })();
 </script>
 </body>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vishnu Kumawat | Portfolio</title>
+<meta name="description" content="Portfolio of Vishnu Kumawat, MBA student at the School of Management and Entrepreneurship, IIT Jodhpur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDF1F9;
+    --surface: #FFFFFF;
+    --ink: #141A33;
+    --muted: #55607F;
+    --indigo: #27348B;
+    --marigold: #E9A415;
+    --line: #C9D2E6;
+    --night: #0E1330;
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  [data-theme="dark"] {
+    --paper: #0E1330;
+    --surface: #171E45;
+    --ink: #EEF1FA;
+    --muted: #A5AFCF;
+    --indigo: #9FB0FF;
+    --line: #2C3668;
+    --night: #070A1D;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    transition: background-color .25s, color .25s;
+  }
+  a { color: var(--indigo); text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Top bar */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; gap: 20px; min-height: 60px; }
+  .mark { font-family: var(--display); font-weight: 800; font-size: 1.15rem; color: var(--ink); text-decoration: none; margin-right: auto; }
+  .topbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  .topbar nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem; }
+  .topbar nav a:hover { color: var(--ink); }
+  .theme-btn {
+    font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
+    background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+  }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(3.4rem, 13vw, 9.5rem);
+    line-height: .86; letter-spacing: -.04em; margin: 0;
+    color: var(--indigo);
+  }
+  .hero h1 span { display: block; }
+  .hero h1 span + span { margin-left: clamp(1.5rem, 9vw, 7rem); color: var(--ink); }
+  .hero-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; margin-top: 44px; align-items: end; }
+  .hero p { font-size: 1.25rem; line-height: 1.5; margin: 0; max-width: 34em; }
+  .contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; justify-items: start; }
+  .contact-list a {
+    display: inline-block; text-decoration: none; font-weight: 600;
+    border-bottom: 3px solid var(--marigold); color: var(--ink); padding-bottom: 1px;
+  }
+  .contact-list a:hover { color: var(--indigo); }
+
+  /* Sections */
+  .block { padding: 56px 0; border-top: 1px solid var(--line); }
+  .block h2 {
+    font-family: var(--display); font-weight: 800; letter-spacing: -.02em;
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem); line-height: 1.05; margin: 0 0 8px;
+  }
+  .block .lede { color: var(--muted); margin: 0 0 28px; max-width: 38em; }
+
+  /* Journey */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .chip {
+    font: inherit; font-size: .95rem; font-weight: 600; cursor: pointer;
+    padding: 7px 16px; border-radius: 999px;
+    border: 1.5px solid var(--line); background: transparent; color: var(--ink);
+  }
+  .chip[aria-pressed="true"] { background: var(--indigo); border-color: var(--indigo); color: var(--paper); }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .year-row { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 14px 0; border-top: 1px dashed var(--line); }
+  .year-row:first-child { border-top: 0; }
+  .year-row[hidden] { display: none; }
+  .year { font-family: var(--display); font-weight: 800; font-size: 2.1rem; line-height: 1.1; color: var(--indigo); }
+  .entries { display: grid; gap: 8px; }
+  .entry { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .entry[hidden] { display: none; }
+  .entry-btn {
+    font: inherit; color: inherit; text-align: left; cursor: pointer;
+    width: 100%; background: none; border: 0; padding: 14px 18px;
+    display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items: center;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.study { background: var(--indigo); }
+  .dot.work { background: var(--marigold); }
+  .dot.community { background: #2E9E7B; }
+  .dot.certificate { background: #C2478E; }
+  .entry-title { font-weight: 600; }
+  .entry-when { color: var(--muted); font-size: .92rem; white-space: nowrap; }
+  .entry-body { padding: 0 18px 16px 42px; color: var(--muted); }
+  .entry-body[hidden] { display: none; }
+  .entry-body p { margin: 0 0 6px; }
+  .entry-body ul { margin: 0; padding-left: 18px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; color: var(--muted); font-size: .92rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+
+  /* Education */
+  .edu { width: 100%; border-collapse: collapse; }
+  .edu th, .edu td { text-align: left; padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .edu thead th { color: var(--muted); font-weight: 500; font-size: .92rem; }
+  .edu tbody th { font-weight: 600; }
+  .edu .where { color: var(--muted); display: block; font-weight: 400; font-size: .95rem; }
+  .bar { height: 10px; border-radius: 5px; background: var(--line); width: min(220px, 30vw); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--indigo); border-radius: 5px; }
+  .score { font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+
+  /* Black hole */
+  .hole { background: var(--night); color: #EEF1FA; border-radius: 20px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
+  .hole-text { padding: 40px; }
+  .hole-text h2 { color: #fff; }
+  .hole-text p { color: #B9C2E2; margin: 0 0 16px; }
+  .hole-text .date { color: var(--marigold); font-weight: 600; }
+  .hole canvas { width: 100%; height: 100%; min-height: 340px; display: block; touch-action: none; cursor: crosshair; }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 24px; }
+  .controls label { display: flex; align-items: center; gap: 10px; font-size: .95rem; color: #B9C2E2; }
+  .controls input[type=range] { accent-color: var(--marigold); width: 150px; }
+  .ghost-btn {
+    font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
+    background: transparent; color: #fff; border: 1.5px solid #4A558F; border-radius: 999px; padding: 6px 16px;
+  }
+
+  /* Skills */
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .cols h3 { font-family: var(--display); font-weight: 600; font-size: 1.25rem; margin: 0 0 12px; }
+  .tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; font-size: .95rem; }
+  .interests { margin-top: 36px; font-size: 1.15rem; max-width: 40em; }
+
+  /* Footer */
+  footer { background: var(--indigo); color: var(--paper); padding: 56px 0; margin-top: 24px; }
+  footer h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1; letter-spacing: -.03em; margin: 0 0 24px; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 12px; }
+  footer .links a, footer .links button {
+    font: inherit; font-weight: 600; cursor: pointer; text-decoration: none;
+    color: var(--indigo); background: var(--paper); border: 0; border-radius: 999px; padding: 10px 20px;
+  }
+  footer .links a.primary { background: var(--marigold); color: #141A33; }
+  footer small { display: block; margin-top: 28px; opacity: .75; }
+
+  @media (max-width: 760px) {
+    .topbar nav { display: none; }
+    .hero { padding: 48px 0 40px; }
+    .hero-row, .hole, .cols { grid-template-columns: 1fr; }
+    .year-row { grid-template-columns: 1fr; gap: 6px; }
+    .entry-btn { grid-template-columns: 12px 1fr; }
+    .entry-when { grid-column: 2; }
+    .hole-text { padding: 28px; }
+    .edu thead { display: none; }
+    .edu td.bar-cell { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    body { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="#top">Vishnu Kumawat</a>
+    <nav aria-label="Sections">
+      <a href="#journey">Journey</a>
+      <a href="#education">Education</a>
+      <a href="#project">Project</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button">Dark mode</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <h1><span>Vishnu</span><span>Kumawat</span></h1>
+    <div class="hero-row">
+      <p>MBA student at the School of Management and Entrepreneurship, IIT Jodhpur. A mathematics graduate from Bhilwara who spent three years helping run the family cattle feed business, and who has volunteered with Muskan Foundation since 2022.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:vishnu12kumawat12@gmail.com">vishnu12kumawat12@gmail.com</a></li>
+        <li><a href="tel:+918619352808">+91 86193 52808</a></li>
+        <li><a href="https://linkedin.com/in/vishnukumawat" target="_blank" rel="noopener">linkedin.com/in/vishnukumawat</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="journey">
+    <div class="wrap">
+      <h2>From Bhilwara to Jodhpur</h2>
+      <p class="lede">Eight years of study, work and community service. Filter by type, and select any entry to read more.</p>
+      <div class="chips" role="group" aria-label="Filter the timeline" id="chips"></div>
+      <ol class="timeline" id="timeline"></ol>
+      <div class="legend" aria-hidden="true">
+        <span><i class="dot study"></i>Study</span>
+        <span><i class="dot work"></i>Work</span>
+        <span><i class="dot community"></i>Community</span>
+        <span><i class="dot certificate"></i>Certificate</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="education">
+    <div class="wrap">
+      <h2>Education</h2>
+      <p class="lede">School and college in Bhilwara, Rajasthan, then management at IIT Jodhpur.</p>
+      <table class="edu">
+        <thead><tr><th scope="col">Qualification</th><th scope="col">Years</th><th scope="col">Result</th><th scope="col"><span hidden>Chart</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">MBA<span class="where">Indian Institute of Technology, Jodhpur</span></th><td>2026 to present</td><td class="score">In progress</td><td class="bar-cell"></td></tr>
+          <tr><th scope="row">B.Sc Mathematics<span class="where">M.L.V. Govt. College, Bhilwara</span></th><td>2020 to 2023</td><td class="score">75.90%</td><td class="bar-cell"><div class="bar"><i style="width:75.9%"></i></div></td></tr>
+          <tr><th scope="row">Senior Secondary<span class="where">Govt Senior Secondary School, RBSE Board</span></th><td>2020</td><td class="score">86.20%</td><td class="bar-cell"><div class="bar"><i style="width:86.2%"></i></div></td></tr>
+          <tr><th scope="row">Secondary<span class="where">S.A.V.N. Senior Secondary School, RBSE Board</span></th><td>2018</td><td class="score">84%</td><td class="bar-cell"><div class="bar"><i style="width:84%"></i></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="project">
+    <div class="wrap">
+      <div class="hole">
+        <div class="hole-text">
+          <h2>Study on black holes</h2>
+          <p class="date">Academic project, March 2023</p>
+          <p>A study of how black holes form and what properties and characteristics define them, covering gravity, spacetime and singularities. The findings were presented at the end of the project.</p>
+          <p>Try it: drag the black hole around, and raise its mass to pull the surrounding matter in faster.</p>
+          <div class="controls">
+            <label>Mass <input type="range" id="mass" min="1" max="10" value="4" step="1"></label>
+            <button class="ghost-btn" id="pauseBtn" type="button">Pause</button>
+          </div>
+        </div>
+        <canvas id="space" aria-label="Animation of particles orbiting and falling into a black hole" role="img"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <p class="lede">Practical office tools, people skills built through business and volunteering, and three languages.</p>
+      <div class="cols">
+        <div>
+          <h3>Technical</h3>
+          <ul class="tags"><li>MS Excel (intermediate)</li><li>MS Word</li><li>MS PowerPoint</li></ul>
+        </div>
+        <div>
+          <h3>Working with people</h3>
+          <ul class="tags"><li>Problem solving</li><li>Solution oriented</li><li>Adaptability</li><li>Active listening</li><li>Teamwork</li></ul>
+        </div>
+        <div>
+          <h3>Languages</h3>
+          <ul class="tags"><li>Mewadi (native)</li><li>Hindi</li><li>English</li></ul>
+        </div>
+      </div>
+      <p class="interests">Outside of work: reading, running, travelling, and exploring business ideas and entrepreneurship.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <div class="links">
+      <a class="primary" href="mailto:vishnu12kumawat12@gmail.com">Send an email</a>
+      <a href="https://linkedin.com/in/vishnukumawat" target="_blank" rel="noopener">Open LinkedIn</a>
+      <a href="tel:+918619352808">Call +91 86193 52808</a>
+      <button type="button" id="copyBtn">Copy email address</button>
+    </div>
+    <small>Vishnu Kumawat, School of Management and Entrepreneurship, Indian Institute of Technology Jodhpur</small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* Theme */
+  var root = document.documentElement, themeBtn = document.getElementById('themeBtn');
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+  }
+  setTheme(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  themeBtn.addEventListener('click', function () {
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* Timeline */
+  var items = [
+    { y: 2018, type: 'study', title: 'Secondary school, 84%', when: '2018', body: ['S.A.V.N. Senior Secondary School, RBSE Board.'] },
+    { y: 2018, type: 'certificate', title: 'Rajasthan State Certificate in Information Technology (RSCIT)', when: 'May to Aug 2018', body: ['Bhilwara, Rajasthan.', ['Proficiency in MS Word, MS Excel and MS PowerPoint.', 'Skills in digital communication and internet applications.', 'Awareness of cybersecurity, e-governance and digital services.']] },
+    { y: 2020, type: 'study', title: 'Senior secondary, 86.20%', when: '2020', body: ['Govt Senior Secondary School, RBSE Board.'] },
+    { y: 2020, type: 'study', title: 'Started B.Sc Mathematics', when: '2020 to 2023', body: ['M.L.V. Govt. College, Bhilwara. Graduated in 2023 with 75.90%.'] },
+    { y: 2021, type: 'certificate', title: 'Certificate in Communicative English and Public Speaking', when: 'Apr to Jul 2021', body: ['Bhilwara, Rajasthan.', ['Took part in extempore, conversations and case-study presentations to build confidence.', 'Improved articulation, communication and structured expression of ideas.']] },
+    { y: 2022, type: 'community', title: 'Joined Muskan Foundation as member and volunteer', when: 'Aug 2022 to present', body: ['Bhilwara, Rajasthan.', ['Coordinated and took part in community initiatives supporting underprivileged individuals and students.', 'Helped organise blood donation camps, tree plantation drives and animal welfare activities.']] },
+    { y: 2023, type: 'study', title: 'Study on black holes', when: 'Mar 2023', body: ['Academic project on the formation, properties and characteristics of black holes, including gravity, spacetime and singularities.'] },
+    { y: 2023, type: 'work', title: 'Operations and business management, family cattle feed business', when: 'Aug 2023 to Apr 2026', body: ['Bhilwara, Rajasthan.', ['Assisted in day-to-day operations: inventory management, dispatch and customer coordination.']] },
+    { y: 2024, type: 'community', title: 'Seven-day Jivan Vidya Shivir', when: 'Apr 2024', body: ['Rajasamand, Rajasthan. A residential programme on self-development, values, harmony in life and nature, and holistic growth.'] },
+    { y: 2026, type: 'study', title: 'Started MBA at IIT Jodhpur', when: '2026 to present', body: ['School of Management and Entrepreneurship, Indian Institute of Technology Jodhpur.'] },
+    { y: 2026, type: 'community', title: 'Sandstone Summit 6.0', when: 'Aug 2026', body: ['IIT Jodhpur. Exposure to industry perspectives, entrepreneurial ideas and discussions on emerging business and management trends.'] }
+  ];
+  var filters = [['all', 'Everything'], ['study', 'Study'], ['work', 'Work'], ['community', 'Community'], ['certificate', 'Certificates']];
+  var chips = document.getElementById('chips'), tl = document.getElementById('timeline');
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+
+  var rows = {};
+  items.forEach(function (it, i) {
+    if (!rows[it.y]) {
+      var row = el('li', 'year-row');
+      row.appendChild(el('div', 'year', String(it.y)));
+      row.appendChild(el('div', 'entries'));
+      tl.appendChild(row); rows[it.y] = row;
+    }
+    var entry = el('div', 'entry'); entry.dataset.type = it.type;
+    var btn = el('button', 'entry-btn'); btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', 'eb' + i);
+    btn.appendChild(el('i', 'dot ' + it.type));
+    btn.appendChild(el('span', 'entry-title', it.title));
+    btn.appendChild(el('span', 'entry-when', it.when));
+    var body = el('div', 'entry-body'); body.id = 'eb' + i; body.hidden = true;
+    it.body.forEach(function (b) {
+      if (typeof b === 'string') body.appendChild(el('p', '', b));
+      else { var ul = el('ul'); b.forEach(function (x) { ul.appendChild(el('li', '', x)); }); body.appendChild(ul); }
+    });
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open)); body.hidden = open;
+    });
+    entry.appendChild(btn); entry.appendChild(body);
+    rows[it.y].querySelector('.entries').appendChild(entry);
+  });
+
+  function applyFilter(f) {
+    Array.prototype.forEach.call(chips.children, function (c) { c.setAttribute('aria-pressed', String(c.dataset.f === f)); });
+    Object.keys(rows).forEach(function (y) {
+      var any = false;
+      Array.prototype.forEach.call(rows[y].querySelectorAll('.entry'), function (e) {
+        var show = f === 'all' || e.dataset.type === f; e.hidden = !show; if (show) any = true;
+      });
+      rows[y].hidden = !any;
+    });
+  }
+  filters.forEach(function (f) {
+    var c = el('button', 'chip', f[1]); c.type = 'button'; c.dataset.f = f[0];
+    c.addEventListener('click', function () { applyFilter(f[0]); });
+    chips.appendChild(c);
+  });
+  applyFilter('all');
+
+  /* Copy email */
+  var copyBtn = document.getElementById('copyBtn');
+  copyBtn.addEventListener('click', function () {
+    var done = function (ok) {
+      copyBtn.textContent = ok ? 'Email address copied' : 'Copy failed, select it above';
+      setTimeout(function () { copyBtn.textContent = 'Copy email address'; }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText('vishnu12kumawat12@gmail.com').then(function () { done(true); }, function () { done(false); });
+    } else done(false);
+  });
+
+  /* Black hole */
+  var cv = document.getElementById('space'), ctx = cv.getContext('2d');
+  var massInput = document.getElementById('mass'), pauseBtn = document.getElementById('pauseBtn');
+  var W = 0, H = 0, hx = 0, hy = 0, parts = [], running = true, dragging = false;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function spawn(p) {
+    var a = Math.random() * Math.PI * 2, r = Math.max(W, H) * (0.3 + Math.random() * 0.35);
+    p.x = hx + Math.cos(a) * r; p.y = hy + Math.sin(a) * r;
+    var v = Math.sqrt(mass() * 60 / r) * (0.75 + Math.random() * 0.3);
+    p.vx = -Math.sin(a) * v; p.vy = Math.cos(a) * v;
+    p.hot = Math.random() < 0.3;
+    return p;
+  }
+  function mass() { return Number(massInput.value) * 14; }
+  function resize() {
+    var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    W = r.width; H = r.height; cv.width = W * d; cv.height = H * d;
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    hx = W / 2; hy = H / 2;
+    parts = []; for (var i = 0; i < 260; i++) parts.push(spawn({}));
+    ctx.fillStyle = '#070A1D'; ctx.fillRect(0, 0, W, H);
+    if (!running) draw();
+  }
+  function step() {
+    var m = mass(), horizon = 10 + Number(massInput.value) * 2.2;
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i], dx = hx - p.x, dy = hy - p.y, d2 = dx * dx + dy * dy, d = Math.sqrt(d2);
+      if (d < horizon || d > Math.max(W, H) * 1.2) { spawn(p); continue; }
+      var f = m * 60 / (d2 + 40);
+      p.vx += dx / d * f * 0.016; p.vy += dy / d * f * 0.016;
+      p.vx *= 0.9992; p.vy *= 0.9992;
+      p.x += p.vx * 0.16; p.y += p.vy * 0.16;
+    }
+  }
+  function draw() {
+    var horizon = 10 + Number(massInput.value) * 2.2;
+    ctx.fillStyle = 'rgba(7,10,29,0.22)'; ctx.fillRect(0, 0, W, H);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      ctx.fillStyle = p.hot ? '#E9A415' : '#9FB0FF';
+      ctx.fillRect(p.x, p.y, 1.8, 1.8);
+    }
+    ctx.beginPath(); ctx.arc(hx, hy, horizon + 4, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(233,164,21,0.85)'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.beginPath(); ctx.arc(hx, hy, horizon, 0, Math.PI * 2);
+    ctx.fillStyle = '#000'; ctx.fill();
+  }
+  function loop() {
+    if (running) { for (var k = 0; k < 3; k++) step(); draw(); }
+    requestAnimationFrame(loop);
+  }
+  function setRunning(r) { running = r; pauseBtn.textContent = r ? 'Pause' : 'Play'; }
+  pauseBtn.addEventListener('click', function () { setRunning(!running); });
+  function moveHole(e) {
+    var r = cv.getBoundingClientRect();
+    hx = Math.min(W, Math.max(0, e.clientX - r.left)); hy = Math.min(H, Math.max(0, e.clientY - r.top));
+    if (!running) draw();
+  }
+  cv.addEventListener('pointerdown', function (e) { dragging = true; cv.setPointerCapture(e.pointerId); moveHole(e); });
+  cv.addEventListener('pointermove', function (e) { if (dragging) moveHole(e); });
+  cv.addEventListener('pointerup', function () { dragging = false; });
+  cv.addEventListener('pointercancel', function () { dragging = false; });
+  massInput.addEventListener('input', function () { if (!running) draw(); });
+  window.addEventListener('resize', resize);
+  resize();
+  if (reduce) { for (var s = 0; s < 400; s++) step(); draw(); setRunning(false); }
+  loop();
+})();
+</script>
+</body>
+</html>
